@@ -2,18 +2,20 @@
 
 # Imports
 import socket
-import select
 import sys
 import _thread as thread
 
+# Default IP and Port
+ip_address = "127.0.0.1"
+port = 4242
+
 # Check arguments
 if len(sys.argv) != 3:
-    print("Please provide an IP address and port.")
-    exit()
-
-# Save IP and Port
-ip_address = str(sys.argv[1])
-port = int(sys.argv[2])
+    print("Using default IP and Port '127.0.0.1:4242'\nYou can specify an IP and Port while starting the client: "
+          "'python3 script ip port'\n")
+if len(sys.argv) == 3:
+    ip_address = str(sys.argv[1])
+    port = int(sys.argv[2])
 
 # Create the server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,12 +37,11 @@ def clientthread(connection, address):
         try:
             message = connection.recv(2048).decode()
             if message:
-                send_message = "<" + address[0] + "> " + message
                 # Log the message
-                print(send_message)
+                print(message)
 
                 # Broadcast message
-                broadcast(send_message, connection, address)
+                broadcast(message, connection, address)
             else:
                 # Cut the connection
                 remove(connection, address)
@@ -76,6 +77,3 @@ while True:
 
     # Start thread for each client
     thread.start_new_thread(clientthread, (conn, addr))
-
-conn.close()
-server.close()

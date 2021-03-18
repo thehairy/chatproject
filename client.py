@@ -1,24 +1,28 @@
 # Script for the Client
 
 # Imports
-import socket
+import datetime
 import select
+import socket
 import sys
 
-# Check arguments
-if len(sys.argv) != 4:
-    print("Please provide the server IP, port and a name.")
-    exit()
+# Default IP and Port
+ip_address = "127.0.0.1"
+port = 4242
 
-# Save IP and Port
-ip_address = str(sys.argv[1])
-port = int(sys.argv[2])
-name = str(sys.argv[3])
+# Check arguments
+if len(sys.argv) != 3:
+    print("Using default IP and Port '127.0.0.1:4242'\nYou can specify an IP and Port while starting the client: "
+          "'python3 script ip port'")
+if len(sys.argv) == 3:
+    ip_address = str(sys.argv[1])
+    port = int(sys.argv[2])
 
 # Connect to Server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((ip_address, port))
 
+name = input("Please enter your name: ")
 
 while True:
     # List with possible input streams
@@ -37,12 +41,19 @@ while True:
                 exit()
         else:
             message = sys.stdin.readline().replace('\n', '')
-            if message == '/quit':
+            message = message.strip()
+
+            if len(message) == 0:
+                continue
+            if message.lower() == '/quit':
                 print('Cutting connection...')
                 exit()
-            sys.stdout.write("<You> ")
-            sys.stdout.write(message)
+            if message.lower().startswith('/nickname') and len(message) > 10:
+                name = message.split(' ')[1]
+                continue
+
+            date_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            message = "[" + date_now + " | " + name + "] " + message
+            sys.stdout.write(message + "\n")
             sys.stdout.flush()
             server.sendto(message.encode(), (ip_address, port))
-
-server.close()
