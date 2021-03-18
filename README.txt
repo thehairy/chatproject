@@ -23,3 +23,7 @@ IP und Port können manuell angegeben werden: "python3 client.py ip port"
 Folgende Befehle können verwendet werden:
 /quit - Trennt die Verbindung
 /nickname name - Ändert den Namen
+
+Zusätzliche Quellen:
+https://www.thepythoncode.com/article/make-a-chat-room-application-in-python - Name & Datum
+Interwebz - Wie man Nachrichten per Socket in Python3 sendet :D
