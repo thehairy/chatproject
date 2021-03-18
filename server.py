@@ -6,13 +6,13 @@ import sys
 import _thread as thread
 
 # Default IP and Port
-ip_address = "127.0.0.1"
+ip_address = '127.0.0.1'
 port = 4242
 
 # Check arguments
 if len(sys.argv) != 3:
-    print("Using default IP and Port '127.0.0.1:4242'\nYou can specify an IP and Port while starting the client: "
-          "'python3 script ip port'\n")
+    print('Using default IP and Port "127.0.0.1:4242"\nYou can specify an IP and Port while starting the client: '
+          '"python3 script ip port"\n')
 if len(sys.argv) == 3:
     ip_address = str(sys.argv[1])
     port = int(sys.argv[2])
@@ -25,12 +25,12 @@ server.listen(2)                                                  # Maximum of 1
 
 client_list = []
 
-print('Chat-Server on IP ' + ip_address + ':' + str(port) + ' started!')
+print(f'Chat-Server on IP {ip_address}:{str(port)} started!')
 
 
 def clientthread(connection, address):
     # Welcome Message
-    connection.send("Welcome to this hairy chatroom!".encode())
+    connection.send('Welcome to this hairy chatroom!'.encode())
 
     # Receive and send Messages
     while True:
@@ -72,8 +72,8 @@ while True:
     client_list.append(conn)
 
     # Log new connection
-    print(addr[0] + " connected")
-    broadcast(addr[0] + ' joined', conn, addr)
+    print(f'{addr[0]} connected')
+    broadcast(f'{addr[0]} joined', conn, addr)
 
     # Start thread for each client
     thread.start_new_thread(clientthread, (conn, addr))

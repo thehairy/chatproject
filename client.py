@@ -7,13 +7,13 @@ import socket
 import sys
 
 # Default IP and Port
-ip_address = "127.0.0.1"
+ip_address = '127.0.0.1'
 port = 4242
 
 # Check arguments
 if len(sys.argv) != 3:
-    print("Using default IP and Port '127.0.0.1:4242'\nYou can specify an IP and Port while starting the client: "
-          "'python3 script ip port'")
+    print('Using default IP and Port "127.0.0.1:4242"\nYou can specify an IP and Port while starting the client: '
+          '"python3 script ip port"\n')
 if len(sys.argv) == 3:
     ip_address = str(sys.argv[1])
     port = int(sys.argv[2])
@@ -22,7 +22,7 @@ if len(sys.argv) == 3:
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((ip_address, port))
 
-name = input("Please enter your name: ")
+name = input('Please enter your name: ')
 
 while True:
     # List with possible input streams
@@ -53,7 +53,7 @@ while True:
                 continue
 
             date_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-            message = "[" + date_now + "] " + name + ": " + message
-            sys.stdout.write(message + "\n")
+            message = f'[{date_now}] {name}: {message}'
+            sys.stdout.write(message + '\n')
             sys.stdout.flush()
             server.sendto(message.encode(), (ip_address, port))
