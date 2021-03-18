@@ -54,6 +54,6 @@ while True:
 
             date_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
             message = f'[{date_now}] {name}: {message}'
-            sys.stdout.write(message + '\n')
+            sys.stdout.write(f'{message}\n')
             sys.stdout.flush()
             server.sendto(message.encode(), (ip_address, port))

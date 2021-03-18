@@ -62,8 +62,8 @@ def broadcast(send_message, connection, address):
 def remove(connection, address):
     if connection in client_list:
         client_list.remove(connection)
-        print(address[0] + ' left')
-        broadcast(address[0] + ' left', connection, address)
+        print(f'{address[0]} left')
+        broadcast(f'{address[0]} left', connection, address)
 
 
 while True:
