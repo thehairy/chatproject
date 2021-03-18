@@ -52,8 +52,8 @@ while True:
                 name = message.split(' ')[1]
                 continue
 
-            date_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            message = "[" + date_now + " | " + name + "] " + message
+            date_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+            message = "[" + date_now + "] " + name + ": " + message
             sys.stdout.write(message + "\n")
             sys.stdout.flush()
             server.sendto(message.encode(), (ip_address, port))
