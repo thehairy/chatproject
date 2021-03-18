@@ -21,7 +21,7 @@ if len(sys.argv) == 3:
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((ip_address, port))
-server.listen(2)                                                  # Maximum of 100 client connections
+server.listen(100)                                                  # Maximum of 100 client connections
 
 client_list = []
 
