@@ -7,7 +7,7 @@ import _thread as thread
 
 # Default IP and Port
 ip_address = '127.0.0.1'
-port = 4242
+port = 6969
 
 # Check arguments
 if len(sys.argv) != 3:
