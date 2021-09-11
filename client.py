@@ -5,6 +5,7 @@ import datetime
 import select
 import socket
 import sys
+from playsound import playsound
 
 # Default IP and Port
 ip_address = '127.0.0.1'
@@ -34,6 +35,7 @@ while True:
         if socks == server:
             message = socks.recv(2048).decode()
             if message:
+                playsound('./res/beep.mp3')
                 print(message)
             else:
                 print('Server connection dropped!')
